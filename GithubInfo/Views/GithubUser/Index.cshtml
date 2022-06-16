@@ -1,0 +1,17 @@
+﻿@model GithubInfo.Models.GithubUser
+
+<h3><b>Retrieve Github User Information</b></h3>
+
+@using (Html.BeginForm("UserDetails", "GithubUser", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Enter Github Username: </td>
+            <td>@Html.TextBoxFor(m => m.username)</td>
+            <td>@Html.ValidationMessageFor(m => m.username)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}

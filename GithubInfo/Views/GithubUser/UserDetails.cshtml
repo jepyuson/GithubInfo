@@ -1,0 +1,61 @@
+﻿
+@model GithubInfo.Models.GithubUser
+
+
+@if (Model != null)
+{
+    <h2>User Details</h2>
+    <table>
+        <tr>
+            <td>Name :</td>
+            <td>@Html.DisplayFor(model => model.name)</td>
+        </tr>
+        <tr>
+            <td>Location :</td>
+            <td>@Html.DisplayFor(model => model.location)</td>
+        </tr>
+        <tr>
+            <td>Avatar :</td>
+            <td><img src="@Url.Content(Model.avatar_url)" alt="avatar" height="40" width="40" /></td>
+        </tr>
+    </table>
+    <div>
+        @if (Model.Repositories != null)
+        {
+        Repositories:
+            <div>
+                @foreach (var repo in Model.Repositories)
+                {
+                    <ul>
+                        <li>Name: <a href="@repo.url" target="_blank">@repo.name</a></li>
+                        <li>Description: @repo.description</li>
+                        <li>Stargazers Count:: @repo.stargazers_count</li>
+                    </ul>
+                }
+            </div>
+        }
+        else
+        {
+            <h4>There are no repositories for this user.</h4>
+        }
+
+    </div>
+    <br />
+}
+else
+{
+    <h4>The user could not be found, Please try a different user</h4>
+    <br />
+}
+
+@using (Html.BeginForm("UserDetails", "GithubUser", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>Search user: </td>
+            <td>@Html.TextBoxFor(m => m.username)</td>
+            <td colspan="2"><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}
+
